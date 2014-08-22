@@ -10,6 +10,7 @@ class Bootstrap3Proxy
 	def response
 		html = open(@url, 'r:binary').read
 		@doc = Nokogiri::HTML(html.toutf8, nil, 'utf-8')
+		remove_stylesheets
 		make_links_absolute
 		set_charset_to_utf8
 		add_class_to_buttons
@@ -26,6 +27,12 @@ class Bootstrap3Proxy
 		link['rel'] = 'stylesheet'
 		link['href'] = '/bootstrap.min.css'
 		head.add_next_sibling(link)
+	end
+
+	def remove_stylesheets
+		@doc.xpath('//link[@rel="stylesheet"]').each do |link|
+			link.remove
+		end
 	end
 
 	# http://blog.biasedwalk.com/2014/03/making-relative-links-absolute-with.html
