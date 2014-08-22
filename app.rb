@@ -3,6 +3,7 @@ require './lib/bootstrap3_proxy.rb'
 Bundler.require
 
 enable :inline_templates
+set :public_folder, 'public'
 
 get '/' do
 	haml :'/'
