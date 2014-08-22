@@ -44,7 +44,7 @@ class Bootstrap3Proxy
 				next if src.match(/^https?:/)
 				begin
 					if src.match(/^[^\/]/)
-						path = File.dirname URI.parse(@url).path
+						path = File.dirname URI.parse(@url).path.gsub(/(\/)$/) { "#{$1}index.html" }
 						src = File.join(path, src)
 					end
 					path = URI.parse(src).path
