@@ -18,6 +18,11 @@ __END__
 !!! 5
 %html
 	%head
+		%title
+			bootstrap3 proxy
+			- if params[:url]
+				= ":"
+				= params[:url]
 		%link{rel:'stylesheet',href:'/bootstrap.min.css'}
 		:css
 			.jumbotron { background-color: white }
@@ -29,7 +34,7 @@ __END__
 			%div.container#header
 				%a{href:'/'}
 					%strong bootstrap3 proxy
-				showing
+				= ":"
 				%a{href:params[:url]}= params[:url]
 			%iframe#response{src:"/response?url=#{params[:url]}"}
 		- else
@@ -38,6 +43,6 @@ __END__
 				%form.form-inline{method:'GET',action:'/'}
 					%div.form-group
 						%label.control-label URL
-						%input.form-control{type:'text',name:'url'}
+					%input.form-control{type:'text',name:'url'}
 					%div.form-group
 						%button.btn.btn-default go
